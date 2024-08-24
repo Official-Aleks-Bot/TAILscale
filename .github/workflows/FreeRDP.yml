@@ -9,7 +9,7 @@ jobs:
 
     steps:
     - name: Run Tailscale
-      run: curl -fsSL https://tailscale.com/install.sh | sh --auth-key=$Env:APIKEY --advertise-exit-node
+      run: sudo curl -fsSL https://tailscale.com/install.sh | sh --auth-key=$Env:APIKEY --advertise-exit-node
       env:
         APIKEY: ${{ secrets.APIKEY }}
 
