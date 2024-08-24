@@ -9,7 +9,9 @@ jobs:
 
     steps:
     - name: Run Tailscale
-      run: curl -fsSL https://tailscale.com/install.sh | sh -s -- --auth-key=$APIKEY --advertise-exit-node
+      run: curl -fsSL https://tailscale.com/install.sh | sh -s -- --auth-key=$Env:APIKEY --advertise-exit-node
+      env:
+        APIKEY: ${{ secrets.APIKEY }}
 
     - name: loop
       run: |
