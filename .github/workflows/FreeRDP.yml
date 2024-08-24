@@ -11,3 +11,8 @@ jobs:
     - name: Run Tailscale
       run: curl -fsSL https://tailscale.com/install.sh | sh -s -- --auth-key=$APIKEY --advertise-exit-node
 
+    - name: loop
+      run: |
+        while true; do
+          sleep 60
+        done
