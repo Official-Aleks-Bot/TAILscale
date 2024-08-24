@@ -8,8 +8,11 @@ jobs:
     timeout-minutes: 9999
 
     steps:
-    - name: Run Tailscale
-      run: sudo curl -fsSL https://tailscale.com/install.sh | sh --auth-key=$Env:APIKEY --advertise-exit-node
+    - name: Install Tailscale
+      run: |
+        sudo curl -fsSL https://tailscale.com/install.sh -o install_tailscale.sh
+        sudo sh install_tailscale.sh
+        sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node
       env:
         APIKEY: ${{ secrets.APIKEY }}
 
