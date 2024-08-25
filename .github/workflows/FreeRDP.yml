@@ -14,10 +14,13 @@ jobs:
         sudo sh install_tailscale.sh
         sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node
         sudo tailscale status --json | jq '.Peer[] | select(.ExitNode == true)'
-
       env:
         APIKEY: ${{ secrets.APIKEY }}
-        
+
+    - name: Change DNS
+      run: |
+        echo -e "nameserver 1.1.1.1\nnameserver 1.0.0.1" | sudo tee /etc/resolv.conf
+
     - name: loop
       run: |
         while true; do
