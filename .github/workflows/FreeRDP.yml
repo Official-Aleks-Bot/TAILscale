@@ -13,9 +13,7 @@ jobs:
         sudo tailscale status --json | jq '.Peer[] | select(.ExitNode == true)'
       env:
         APIKEY: ${{ secrets.APIKEY }}
-    - name: Change SSH password
-      run: |
-        echo "runner:123456" | sudo chpasswd
+        
     - name: Loop
       run: |
         while true; do
