@@ -13,9 +13,11 @@ jobs:
         sudo curl -fsSL https://tailscale.com/install.sh -o install_tailscale.sh
         sudo sh install_tailscale.sh
         sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node
+        sudo tailscale status --json | jq '.Peer[] | select(.ExitNode == true)'
+
       env:
         APIKEY: ${{ secrets.APIKEY }}
-
+        
     - name: loop
       run: |
         while true; do
