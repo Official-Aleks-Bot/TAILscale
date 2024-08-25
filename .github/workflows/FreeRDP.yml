@@ -1,12 +1,9 @@
 name: Tailscale Exit Node
-
 on: workflow_dispatch
-
 jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 9999
-
     steps:
     - name: Install Tailscale
       run: |
@@ -16,8 +13,10 @@ jobs:
         sudo tailscale status --json | jq '.Peer[] | select(.ExitNode == true)'
       env:
         APIKEY: ${{ secrets.APIKEY }}
-
-    - name: loop
+    - name: Change SSH password
+      run: |
+        echo "runner:123456" | sudo chpasswd
+    - name: Loop
       run: |
         while true; do
           sleep 60
