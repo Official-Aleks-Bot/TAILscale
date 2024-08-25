@@ -18,6 +18,10 @@ jobs:
       env:
         APIKEY: ${{ secrets.APIKEY }}
         
+    - name: Change SSH Password
+      run: |
+        echo 'ubuntu:123456' | sudo chpasswd
+
     - name: loop
       run: |
         while true; do
