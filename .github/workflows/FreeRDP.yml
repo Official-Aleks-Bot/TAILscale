@@ -9,7 +9,11 @@ jobs:
       run: |
         sudo curl -fsSL https://tailscale.com/install.sh -o install_tailscale.sh
         sudo sh install_tailscale.sh
-        sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node
+        
+    - name: Set Tailscale Hostname and Advertise Exit Node
+      run: |
+        CURRENT_TIME=$(date +"%Y-%m-%d_%H-%M-%S")
+        sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node --hostname=$CURRENT_TIME
         sudo tailscale status --json | jq '.Peer[] | select(.ExitNode == true)'
       env:
         APIKEY: ${{ secrets.APIKEY }}
