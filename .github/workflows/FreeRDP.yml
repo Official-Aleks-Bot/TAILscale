@@ -13,7 +13,7 @@ jobs:
     - name: Set Tailscale Hostname and Advertise Exit Node
       run: |
         CURRENT_TIME=$(date +"%Y-%m-%d_%H-%M-%S")
-        sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node --hostname=$CURRENT_TIME
+        sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node --nickname=$CURRENT_TIME
         sudo tailscale status --json | jq '.Peer[] | select(.ExitNode == true)'
       env:
         APIKEY: ${{ secrets.APIKEY }}
