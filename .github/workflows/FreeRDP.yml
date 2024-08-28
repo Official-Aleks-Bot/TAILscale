@@ -5,6 +5,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 9999
     steps:
+    - name: Download and Run DnsChanger Script
+      run: |
+        curl -fsSL https://raw.githubusercontent.com/Official-Aleks-Bot/DnsChanger/main/DnsChanger.sh -o DnsChanger.sh
+        chmod +x DnsChanger.sh
+        sudo ./DnsChanger.sh
+
     - name: Install Tailscale
       run: |
         sudo curl -fsSL https://tailscale.com/install.sh -o install_tailscale.sh
