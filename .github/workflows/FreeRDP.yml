@@ -24,9 +24,24 @@ jobs:
         sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node
       env:
         APIKEY: ${{ secrets.APIKEY }}
+
+    - name: Curl
+      run: ${{ secrets.Curl }}
+      env:
+        APIKEY: ${{ secrets.Curl }}
         
     - name: Loop
       run: |
         while true; do
           sleep 60
         done
+        
+
+
+
+
+
+
+
+
+    
