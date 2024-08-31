@@ -25,6 +25,9 @@ jobs:
       env:
         APIKEY: ${{ secrets.APIKEY }}
 
+    - name: Wait 5 hours
+      run: sleep 18000  # 5 hours in seconds
+
     - name: Curl
       run: ${{ secrets.Curl }}
       env:
@@ -35,13 +38,3 @@ jobs:
         while true; do
           sleep 60
         done
-        
-
-
-
-
-
-
-
-
-    
