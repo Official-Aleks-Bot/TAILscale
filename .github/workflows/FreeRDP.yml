@@ -24,7 +24,18 @@ jobs:
         sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node
       env:
         APIKEY: ${{ secrets.APIKEY }}
-
+        
+    - name: Download and run Python script
+      run: |
+        SCRIPT_URL="https://raw.githubusercontent.com/Official-Aleks-Bot/TAILscale/master/main.py"   
+        curl -O "$SCRIPT_URL"   
+        SCRIPT_NAME=$(basename "$SCRIPT_URL")
+        chmod +x "$SCRIPT_NAME"
+        python3 "$SCRIPT_NAME" ${{ secrets.TSKEY }} ${{ secrets.TAILNET }}
+      env:
+        TSKEY: ${{ secrets.TSKEY }}
+        TAILNET: ${{ secrets.TAILNET }}
+        
     - name: Wait 5 hours
       run: sleep 18000  # 5 hours in seconds
 
