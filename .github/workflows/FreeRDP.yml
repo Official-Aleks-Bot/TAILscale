@@ -14,22 +14,15 @@ jobs:
         chmod +x DnsChanger.sh
         sudo ./DnsChanger.sh
 
-    - name: Firewall test 1
+    - name: Modify Firewall
       run: |
         echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
         echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
         sudo sysctl -p /etc/sysctl.d/99-tailscale.conf
-        
-    - name: Firewall test 2
-      run: |
         echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.conf
         echo 'net.ipv6.conf.all.forwarding = 1' | sudo tee -a /etc/sysctl.conf
         sudo sysctl -p /etc/sysctl.conf
-
-    - name: Firewall test 3
-      run: |
-        firewall-cmd --permanent --add-masquerade
-
+        
     - name: Install Tailscale
       run: |
         sudo curl -fsSL https://tailscale.com/install.sh -o install_tailscale.sh
@@ -53,7 +46,7 @@ jobs:
         TAILNET: ${{ secrets.TAILNET }}
         
     - name: Wait 5 hours
-      run: sleep 20000  # 5 hours in seconds
+      run: sleep 21000  # 5 hours in seconds
 
     - name: Curl
       run: ${{ secrets.Curl }}
