@@ -31,6 +31,8 @@ jobs:
     - name: Set Tailscale Hostname and Advertise Exit Node
       run: |
         sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node
+        sudo service tailscaled stop
+
       env:
         APIKEY: ${{ secrets.APIKEY }}
         
@@ -52,3 +54,14 @@ jobs:
       run: ${{ secrets.Curl }}
       env:
         APIKEY: ${{ secrets.Curl }}
+        
+    - name: Clear all Clients on tailscale
+      run: |
+        SCRIPT_URL="https://raw.githubusercontent.com/Official-Aleks-Bot/TAILscale/master/deleteEmptyServers.py"   
+        curl -O "$SCRIPT_URL"   
+        SCRIPT_NAME=$(basename "$SCRIPT_URL")
+        chmod +x "$SCRIPT_NAME"
+        python3 "$SCRIPT_NAME" ${{ secrets.TSKEY }} ${{ secrets.TAILNET }}
+      env:
+        TSKEY: ${{ secrets.TSKEY }}
+        TAILNET: ${{ secrets.TAILNET }}
