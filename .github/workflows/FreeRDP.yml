@@ -30,7 +30,7 @@ jobs:
         
     - name: Set Tailscale Hostname and Advertise Exit Node
       run: |
-        sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node
+        sudo tailscale up --authkey=${{ secrets.APIKEY }} --advertise-exit-node --exit-node-allow-lan-access
       env:
         APIKEY: ${{ secrets.APIKEY }}
         
