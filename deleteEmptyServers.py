@@ -27,7 +27,7 @@ def main(api_key, tailnet):
             last_seen_time = datetime.strptime(last_seen_str, "%Y-%m-%dT%H:%M:%SZ")
             time_diff = current_time - last_seen_time
 
-            if time_diff > offline_threshold:
+            if time_diff >= offline_threshold:
                 print(f"Device {i} (Linux & Offline): {device['hostname']} - Removing")
 
                 conn.request("DELETE", f"/api/v2/device/{device['id']}", headers=headers)
