@@ -5,15 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 9999
     steps:
-    - name: Install NetworkManager
-      run: sudo apt-get update && sudo apt-get install -y network-manager
-
-    - name: Download and Run DnsChanger Script
-      run: |
-        curl -fsSL https://raw.githubusercontent.com/Official-Aleks-Bot/DnsChanger/main/DnsChanger.sh -o DnsChanger.sh
-        chmod +x DnsChanger.sh
-        sudo ./DnsChanger.sh
-
     - name: Modify Firewall
       run: |
         echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
