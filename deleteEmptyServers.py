@@ -33,8 +33,12 @@ def main(api_key, tailnet):
                 conn.request("DELETE", f"/api/v2/device/{device['id']}", headers=headers)
                 res = conn.getresponse()
                 data = res.read()
+                response_data = data.decode("utf-8")
 
-                print(data.decode("utf-8"))
+                if response_data.strip():
+                    print(response_data)
+                else:
+                    print(f"Device {i} removal resulted in null response, skipping removal.")
             else:
                 print(f"Device {i} (Linux & Online): {device['hostname']} - Keeping")
         else:
