@@ -11,7 +11,7 @@ def main(api_key, tailnet):
         'Content-Type': "application/json"
     }
 
-    offline_threshold = timedelta(seconds=0)
+    offline_threshold = timedelta(seconds=1)
     current_time = datetime.utcnow()
 
     conn.request("GET", f"/api/v2/tailnet/{tailnet}/devices", headers=headers)
