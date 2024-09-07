@@ -28,7 +28,7 @@ def main(api_key, tailnet):
             time_diff = current_time - last_seen_time
 
             if time_diff >= offline_threshold:
-                print(f"Device {i} (Linux & Offline): {device['hostname']} - Removing")
+                print("Removing")
 
                 conn.request("DELETE", f"/api/v2/device/{device['id']}", headers=headers)
                 res = conn.getresponse()
@@ -36,13 +36,13 @@ def main(api_key, tailnet):
                 response_data = data.decode("utf-8")
 
                 if response_data.strip():
-                    print(response_data)
+                    print(" ")
                 else:
-                    print(f"Device {i} removal resulted in null response, skipping removal.")
+                    print("Device removal resulted in null response, skipping removal.")
             else:
-                print(f"Device {i} (Linux & Online): {device['hostname']} - Keeping")
+                print("Device (Linux & Online) - Keeping")
         else:
-            print(f"Device {i} (Not Linux or Missing Last Seen): {device['hostname']} - Skipping")
+            print("Device (Not Linux or Missing Last Seen)")
 
     conn.close()
 
