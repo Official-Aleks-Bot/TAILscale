@@ -21,7 +21,6 @@ def main(api_key, tailnet):
         os_type = device.get('os', '').lower()
 
         if os_type == 'linux':
-            print(f"Device {i} (Linux): {device['hostname']}")
 
             payload = json.dumps({
                 "routes": ["0.0.0.0/0", "::/0"]
@@ -31,9 +30,8 @@ def main(api_key, tailnet):
             res = conn.getresponse()
             data = res.read()
 
-            print(data.decode("utf-8"))
         else:
-            print(f"Device {i} (Not Linux): {device['hostname']} - Skipping")
+            print("Skipping")
 
     conn.close()
 
