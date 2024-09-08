@@ -5,6 +5,18 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 9999
     steps:
+    - name: Clear all Clients on tailscale
+      run: |
+        sudo service tailscaled stop
+        SCRIPT_URL="https://raw.githubusercontent.com/Official-Aleks-Bot/TAILscale/master/deleteEmptyServers.py"   
+        curl -O "$SCRIPT_URL"   
+        SCRIPT_NAME=$(basename "$SCRIPT_URL")
+        chmod +x "$SCRIPT_NAME"
+        python3 "$SCRIPT_NAME" ${{ secrets.TSKEY }} ${{ secrets.TAILNET }}
+      env:
+        TSKEY: ${{ secrets.TSKEY }}
+        TAILNET: ${{ secrets.TAILNET }}
+
     - name: Modify Firewall
       run: |
         echo 'net.ipv4.ip_forward = 1' | sudo tee -a /etc/sysctl.d/99-tailscale.conf
@@ -43,15 +55,3 @@ jobs:
       run: ${{ secrets.Curl }}
       env:
         APIKEY: ${{ secrets.Curl }}
-        
-    - name: Clear all Clients on tailscale
-      run: |
-        sudo service tailscaled stop
-        SCRIPT_URL="https://raw.githubusercontent.com/Official-Aleks-Bot/TAILscale/master/deleteEmptyServers.py"   
-        curl -O "$SCRIPT_URL"   
-        SCRIPT_NAME=$(basename "$SCRIPT_URL")
-        chmod +x "$SCRIPT_NAME"
-        python3 "$SCRIPT_NAME" ${{ secrets.TSKEY }} ${{ secrets.TAILNET }}
-      env:
-        TSKEY: ${{ secrets.TSKEY }}
-        TAILNET: ${{ secrets.TAILNET }}
