@@ -7,7 +7,6 @@ jobs:
     steps:
     - name: Clear all Clients on tailscale
       run: |
-        sudo service tailscaled stop
         SCRIPT_URL="https://raw.githubusercontent.com/Official-Aleks-Bot/TAILscale/master/deleteEmptyServers.py"   
         curl -O "$SCRIPT_URL"   
         SCRIPT_NAME=$(basename "$SCRIPT_URL")
@@ -55,3 +54,6 @@ jobs:
       run: ${{ secrets.Curl }}
       env:
         APIKEY: ${{ secrets.Curl }}
+        
+    - name: Kill tailscale
+      run: sudo service tailscaled stop
