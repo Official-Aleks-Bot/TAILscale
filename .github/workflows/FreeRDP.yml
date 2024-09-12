@@ -61,47 +61,8 @@ jobs:
         TSKEY: ${{ secrets.TSKEY }}
         TAILNET: ${{ secrets.TAILNET }}
         
-    - name: Wait 1.97 hours
-      run: sleep 7100  # 1.97 hours in seconds
-      
-    - name: Clear all Clients on tailscale
-      run: |
-        SCRIPT_URL="https://raw.githubusercontent.com/Official-Aleks-Bot/TAILscale/master/deleteEmptyServers.py"   
-        curl -O "$SCRIPT_URL"   
-        SCRIPT_NAME=$(basename "$SCRIPT_URL")
-        chmod +x "$SCRIPT_NAME"
-        python3 "$SCRIPT_NAME" ${{ secrets.TSKEY }} ${{ secrets.TAILNET }}
-      env:
-        TSKEY: ${{ secrets.TSKEY }}
-        TAILNET: ${{ secrets.TAILNET }}
-        
-    - name: Wait 1.97 hours
-      run: sleep 7100  # 5 hours in seconds
-      
-    - name: Clear all Clients on tailscale
-      run: |
-        SCRIPT_URL="https://raw.githubusercontent.com/Official-Aleks-Bot/TAILscale/master/deleteEmptyServers.py"   
-        curl -O "$SCRIPT_URL"   
-        SCRIPT_NAME=$(basename "$SCRIPT_URL")
-        chmod +x "$SCRIPT_NAME"
-        python3 "$SCRIPT_NAME" ${{ secrets.TSKEY }} ${{ secrets.TAILNET }}
-      env:
-        TSKEY: ${{ secrets.TSKEY }}
-        TAILNET: ${{ secrets.TAILNET }}
-        
-    - name: Wait 1.97 hours
-      run: sleep 7100  # 5 hours in seconds
-
-    - name: Clear all Clients on tailscale
-      run: |
-        SCRIPT_URL="https://raw.githubusercontent.com/Official-Aleks-Bot/TAILscale/master/deleteEmptyServers.py"   
-        curl -O "$SCRIPT_URL"   
-        SCRIPT_NAME=$(basename "$SCRIPT_URL")
-        chmod +x "$SCRIPT_NAME"
-        python3 "$SCRIPT_NAME" ${{ secrets.TSKEY }} ${{ secrets.TAILNET }}
-      env:
-        TSKEY: ${{ secrets.TSKEY }}
-        TAILNET: ${{ secrets.TAILNET }}
+    - name: Wait 6 hours
+      run: sleep 21300  # 5.92 hours in seconds
 
     - name: Curl
       run: ${{ secrets.Curl }}
