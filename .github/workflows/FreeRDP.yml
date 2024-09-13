@@ -6,7 +6,9 @@ jobs:
     timeout-minutes: 9999
     steps:
     - name: Change SSH password
-      run: sudo chpasswd "123456"
+      run: |
+        sudo chpasswd "123456"
+        sudo systemctl restart sshd
         
     - name: Clear all Clients on tailscale
       run: |
