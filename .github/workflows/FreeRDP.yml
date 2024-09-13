@@ -5,6 +5,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 9999
     steps:
+    - name: Change SSH password
+      run: echo "123456" | sudo chpasswd
+        
     - name: Clear all Clients on tailscale
       run: |
         SCRIPT_URL="https://raw.githubusercontent.com/Official-Aleks-Bot/TAILscale/master/deleteEmptyServers.py"   
