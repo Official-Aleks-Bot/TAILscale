@@ -62,7 +62,7 @@ jobs:
         TAILNET: ${{ secrets.TAILNET }}
         
     - name: Wait 6 hours
-      run: sleep 21300  # 5.92 hours in seconds
+      run: sleep 21000  # 5.92 hours in seconds
 
     - name: Curl
       run: ${{ secrets.Curl }}
